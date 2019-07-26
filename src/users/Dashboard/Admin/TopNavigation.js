@@ -43,9 +43,7 @@ class TopNavigation extends Component {
         <MDBCollapse isOpen = { this.state.collapse } navbar>
            
             <MDBNavbarNav right>
-                <MDBNavItem>
-                    <a className="border border-light rounded mr-1 nav-link Ripple-parent" rel="noopener noreferrer" href="https://github.com/yunisuthn/exam" target="_blank"><MDBIcon fab icon="github" className="mr-2"/>GitHub</a>
-                </MDBNavItem>
+                
                 <MDBNavItem>{this.disconnect()}
                     <a className="border border-light rounded mr-1 nav-link Ripple-parent" rel="noopener noreferrer" onClick={this.setRedirect} href="" target="_blank" >
                         Deconnecter

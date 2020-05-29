@@ -1,66 +1,39 @@
 import React from 'react';
-import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse, MDBNavItem, MDBNavLink} from 'mdbreact';
-//import { BrowserRouter as Router } from 'react-router-dom';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
-import App from './App.jsx';
-import PostFrontToBack from './users/Dashboard/postWithUpload_frontToBack';
-import { PrivateRoute } from './users/PrivateRoute.js';
-import './App.css'
+import Acceuil from './components/Accueil';
+import Atelier from './components/Atelier';
+import Objectif from './components/Objectif';
+import Introduction from './components/Introduction';
+import Login from './components/users/Login/Login';
+import Register from './components/users/Register/Register';
+/* import Dashboard from './components/users/Dashboard/Dashboard'; */
+import Profil from './components/users/Dashboard/Profil';
+import Liste from './components/users/Dashboard/Liste';
+import Ajout from './components/users/Dashboard/Ajout';
+import Edit from './components/users/Dashboard/Edit';
+import { PrivateRoute } from './components/users/PrivateRoute.js';
 
-class Appp extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      collapse: false,
-    };
-    this.onClick = this.onClick.bind(this);
-  }
+function App() {
+  return (
+    <div className="">
+      <Switch>
 
-  onClick() {
-    this.setState({
-      collapse: !this.state.collapse,
-    });
-  }
+        <Route exact path='/' component={Acceuil} />
+        <Route exact path='/atelier' component={Atelier} />
+        <Route exact path='/Objectif' component={Objectif} />
+        <Route exact path='/Introduction' component={Introduction} />
+        <Route exact path='/connect' component={Login} />
+        <Route exact path='/register' component={Register} />
+        {/* <PrivateRoute path="/admin" component={Dashboard} /> */}
+        <PrivateRoute path="/admin" component={Profil} />
+        <PrivateRoute path="/liste" component={Liste} />
+        <PrivateRoute path="/ajout" component={Ajout} />
+        <PrivateRoute path="/editer/:id" component={Edit} />
 
-  render() {
-    return (
-      <div>
-        <Router>
-
-          <div>
-            <header>
-              <MDBNavbar className='nav' dark expand="md">{/* color="default-color" */}
-                <MDBNavbarBrand href="/">
-                  <strong className='couleur'>E-commerce</strong>
-                </MDBNavbarBrand>
-                <MDBNavbarToggler onClick={this.onClick} />
-                <MDBCollapse isOpen={this.state.collapse} navbar>
-                  <MDBNavbarNav right>
-                    {/* <MDBNavItem className='MDBNavLink'>
-                      <MDBNavLink to="/">Acceuil</MDBNavLink>
-                    </MDBNavItem> */}
-                    <MDBNavItem className='MDBNavLink'>
-                      <MDBNavLink to="/login" className='couleur'>Dashboard</MDBNavLink>
-                    </MDBNavItem>
-                  </MDBNavbarNav>
-                </MDBCollapse>
-              </MDBNavbar>
-            </header>
-            <div className='col-md-6 margin'>
-            </div>
-            <Switch className='col-md-3 margin'>
-              <Route exact path='/' component={App} />
-              <PrivateRoute path="/dashboard" component={PostFrontToBack} />
-
-              {/* <PrivateRoute path="/profil" component={ListTous} /> */}
-              {/* <PrivateRoute path='/dashboard' component={Dashboard} /> */}
-            </Switch>
-          </div>
-        </Router>
-      </div>
-    );
-  }
+      </Switch>
+    </div>
+  );
 }
 
-export default Appp;
+export default App;
